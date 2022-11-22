@@ -1,0 +1,14 @@
+logging:
+  file:
+    name: ./logs/application.log
+server:
+  port: 8084
+spring:
+  datasource:
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/product_transaction_rest_db
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
