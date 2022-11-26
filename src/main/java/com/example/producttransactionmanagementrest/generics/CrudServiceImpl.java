@@ -6,7 +6,6 @@ import java.util.Optional;
 
 public abstract class CrudServiceImpl<T, ID> implements CrudService<T, ID>{
 
-
     @Override
     public <S extends T> S save(S entity) {
         return getRepository().save(entity);

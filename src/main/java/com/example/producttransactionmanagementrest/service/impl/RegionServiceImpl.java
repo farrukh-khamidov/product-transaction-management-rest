@@ -4,10 +4,12 @@ import com.example.producttransactionmanagementrest.dto.PlaceResDto;
 import com.example.producttransactionmanagementrest.dto.RegionReqDto;
 import com.example.producttransactionmanagementrest.entity.Place;
 import com.example.producttransactionmanagementrest.entity.Region;
+import com.example.producttransactionmanagementrest.generics.JpaServiceImpl;
 import com.example.producttransactionmanagementrest.repository.PlaceRepository;
 import com.example.producttransactionmanagementrest.repository.RegionRepository;
 import com.example.producttransactionmanagementrest.service.RegionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -16,25 +18,16 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RegionServiceImpl implements RegionService {
+public class RegionServiceImpl extends JpaServiceImpl<Region, Long> implements RegionService {
 
     private final RegionRepository regionRepository;
     private final PlaceRepository placeRepository;
 
-    @Override
-    public List<Region> findAll() {
-        return regionRepository.findAll();
-    }
-
-    @Override
-    public Region save(Region region) {
-        return regionRepository.save(region);
-    }
 
     @Override
     public List<PlaceResDto> saveRegionWithPlaces(RegionReqDto regionDto) {
         Region region = new Region(regionDto.getName());
-        region = regionRepository.save(region);
+        region = save(region);
         final long regionId = region.getId();
         regionDto.getPlaces().forEach(placeName -> {
             if (!placeRepository.existsByName(placeName)) {
@@ -45,5 +38,10 @@ public class RegionServiceImpl implements RegionService {
         List<Place> places = placeRepository.findAllByRegionId(regionId);
 
         return places.stream().sorted(Comparator.comparing(Place::getName)).map(place -> new PlaceResDto(place.getId(), place.getName())).collect(Collectors.toList());
+    }
+
+    @Override
+    public JpaRepository<Region, Long> getRepository() {
+        return regionRepository;
     }
 }
