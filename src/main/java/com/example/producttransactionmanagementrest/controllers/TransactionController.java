@@ -1,5 +1,6 @@
 package com.example.producttransactionmanagementrest.controllers;
 
+import com.example.producttransactionmanagementrest.dto.EvaluateReqDto;
 import com.example.producttransactionmanagementrest.dto.OfferReqDto;
 import com.example.producttransactionmanagementrest.dto.TransactionReqDto;
 import com.example.producttransactionmanagementrest.exceptions.ApiException;
@@ -27,6 +28,15 @@ public class TransactionController {
 
         return ResponseEntity.ok(transactionService.addTransaction(reqDto));
     }
+
+    @PostMapping("/evaluate")
+    public ResponseEntity evaluateTransaction(@RequestBody EvaluateReqDto reqDto) {
+        log.info("evaluateTransaction request: {}", reqDto);
+
+        return ResponseEntity.ok(transactionService.evaluateTransaction(reqDto));
+    }
+
+
 
 
 }

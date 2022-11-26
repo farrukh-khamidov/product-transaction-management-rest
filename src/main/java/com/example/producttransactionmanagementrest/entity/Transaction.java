@@ -23,6 +23,9 @@ public class Transaction {
     @Column(unique = true)
     private String transactionId;
 
+    @Column(columnDefinition = "integer default 0")
+    private Integer score;
+
     @ManyToOne
     private Carrier carrier;
 

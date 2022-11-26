@@ -12,7 +12,8 @@ public enum StatusEnum {
     ERR_1007(HttpStatus.BAD_REQUEST, 1006, "Transaction already exists"),
     ERR_1008(HttpStatus.BAD_REQUEST, 1008, "Offer and request product ids must be same"),
     ERR_1009(HttpStatus.BAD_REQUEST, 1009, "This carrier should serve both the delivery and pickup places"),
-    ERR_1010(HttpStatus.BAD_REQUEST, 1010, "Offer already exists")
+    ERR_1010(HttpStatus.BAD_REQUEST, 1010, "Offer already exists"),
+    ERR_1011(HttpStatus.NOT_FOUND, 1011, "Transaction Not Found"),
     ;
 
     private HttpStatus httpStatus;

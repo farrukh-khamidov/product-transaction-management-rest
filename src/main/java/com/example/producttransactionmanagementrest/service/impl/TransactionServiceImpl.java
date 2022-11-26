@@ -1,5 +1,6 @@
 package com.example.producttransactionmanagementrest.service.impl;
 
+import com.example.producttransactionmanagementrest.dto.EvaluateReqDto;
 import com.example.producttransactionmanagementrest.dto.OfferReqDto;
 import com.example.producttransactionmanagementrest.dto.TransactionReqDto;
 import com.example.producttransactionmanagementrest.entity.*;
@@ -59,5 +60,17 @@ public class TransactionServiceImpl implements TransactionService {
 
         return transactionRepository.save(transaction);
 
+    }
+
+    @Override
+    public Boolean evaluateTransaction(EvaluateReqDto reqDto) {
+        if (reqDto.getScore() < 1 || reqDto.getScore() > 10) return false;
+        Optional<Transaction> optional = transactionRepository.findByTransactionId(reqDto.getTransactionId());
+        if (optional.isEmpty()) throw new TransactionNotFoundException();
+
+        Transaction transaction = optional.get();
+        transaction.setScore(reqDto.getScore());
+        transactionRepository.save(transaction);
+        return true;
     }
 }
