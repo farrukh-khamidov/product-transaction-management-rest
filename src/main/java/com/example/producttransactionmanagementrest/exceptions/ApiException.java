@@ -1,27 +1,19 @@
 package com.example.producttransactionmanagementrest.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 public class ApiException extends RuntimeException {
 
-    private int code;
-    private HttpStatus httpStatus;
+    private StatusEnum statusEnum;
 
     public ApiException(String message) {
         super(message);
     }
 
-    public ApiException(HttpStatus httpStatus, int code, String message) {
-        super(message);
-        this.httpStatus = httpStatus;
-        this.code = code;
+    public ApiException(StatusEnum statusEnum) {
+        super(statusEnum.getMessage());
+        this.statusEnum = statusEnum;
     }
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
-    }
-
-    public int getCode() {
-        return code;
+    public StatusEnum getStatusEnum() {
+        return statusEnum;
     }
 }

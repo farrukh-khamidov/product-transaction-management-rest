@@ -3,6 +3,7 @@ logging:
     name: ./logs/application.log
 server:
   port: 8084
+
 spring:
   datasource:
     password: postgres

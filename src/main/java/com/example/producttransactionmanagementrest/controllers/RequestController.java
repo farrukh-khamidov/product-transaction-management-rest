@@ -21,18 +21,7 @@ public class RequestController {
     @PostMapping
     public ResponseEntity addRequest(@RequestBody RequestReqDto reqDto) {
         log.info("addRequest request: {}", reqDto);
-
-        try {
-            return ResponseEntity.ok(requestService.addRequest(reqDto));
-        } catch (ApiException e) {
-            return new ResponseEntity<>(new ErrorResponse(e.getCode(), e.getMessage()), e.getHttpStatus());
-        }
+        return ResponseEntity.ok(requestService.addRequest(reqDto));
     }
-
-//    @PostMapping
-//    public ResponseEntity addRequest(@RequestBody RequestReqDto reqDto) {
-//        log.info("addRequest request: {}", reqDto);
-//        return ResponseEntity.ok(requestService.addRequest(reqDto));
-//    }
 
 }

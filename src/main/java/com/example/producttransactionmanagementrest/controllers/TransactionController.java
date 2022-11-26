@@ -25,11 +25,7 @@ public class TransactionController {
     public ResponseEntity addTransaction(@RequestBody TransactionReqDto reqDto) {
         log.info("addTransaction request: {}", reqDto);
 
-        try {
-            return ResponseEntity.ok(transactionService.addTransaction(reqDto));
-        } catch (ApiException e) {
-            return new ResponseEntity<>(new ErrorResponse(e.getCode(), e.getMessage()), e.getHttpStatus());
-        }
+        return ResponseEntity.ok(transactionService.addTransaction(reqDto));
     }
 
 
